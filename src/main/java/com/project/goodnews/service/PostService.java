@@ -61,25 +61,41 @@ public class PostService {
 	}
 
 	public void deletePost(String postId) {
-		Post post = this.postRepository.findById(postId).orElseThrow(() -> new NotFoundException("Post id not exist"));
+		Post post = this.postRepository.findById(postId)
+				.orElseThrow(() -> new NotFoundException("Post not found with id: " + postId));
 		postRepository.delete(post);
 	}
 
-	public Post updatePost(PostRequestDTO data) {
+	public Post updatePost(String postId, PostRequestDTO data) {
+
+		Post existingPost = postRepository.findById(postId)
+				.orElseThrow(() -> new ValidUserException("Post not found with id: " + postId));
+
 		final Slugify slg = Slugify.builder().build();
 		String slugData = slg.slugify(data.title());
 
 		if (data.slug() != null && !data.slug().isEmpty()) {
 			slugData = data.slug();
+			existingPost.setSlug(slugData);
 		}
 
-		Post newPost = new Post(data);
+		if (data.title() != null && !data.title().isEmpty()) {
+			existingPost.setTitle(data.title());
+		}
 
-		validatePost(newPost);
+		if (data.text() != null && !data.text().isEmpty()) {
+			existingPost.setText(data.text());
+		}
 
-		newPost.setSlug(slugData);
+		if (data.user().getId() == null && data.user().getId().isEmpty()) {
+			throw new ValidPostException("User Id is required");
+		}
 
-		return postRepository.save(newPost);
+		if (!userRepository.existsById(existingPost.getUser().getId())) {
+			throw new ValidPostException("User Id not exist. try another id");
+		}
+
+		return postRepository.save(existingPost);
 	}
 
 	public void validatePost(Post post) {

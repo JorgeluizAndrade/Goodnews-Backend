@@ -49,10 +49,10 @@ public class PostController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity attPost(@RequestBody PostRequestDTO data) {
-		Post updatePost = postService.updatePost(data);
+	public ResponseEntity attPost(@PathVariable("id") String id, @RequestBody PostRequestDTO data) {
+		Post updatePost = postService.updatePost(id, data);
 
 		return ResponseEntity.status(HttpStatus.OK).body(updatePost);
 	}
