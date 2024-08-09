@@ -26,11 +26,11 @@ Faz login de um usuário.
 
 **Body (raw JSON):**
 ```json
-{
+
     {
     "email": "jorge1718@gmail.com",
     "password": "1234"
-}
+
 
 }
 ```
