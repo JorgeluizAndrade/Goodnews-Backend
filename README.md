@@ -95,7 +95,7 @@ Update Post
 
 **Body (raw JSON):**
 ```json
-{
+
    {
     "title": "Jesus é a vida",
     "text": "Santo, Santo, Santo é o Senhor!",
@@ -103,7 +103,7 @@ Update Post
         "id": "2e612609-358d-4642-a850-d0c062722fe8"
     }
 }
-}
+
 ```
 
 **URL:** http://localhost:8080/api/posts/d45e8db5-2fa5-49cf-bc9a-29632b6a764a
