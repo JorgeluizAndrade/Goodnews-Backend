@@ -67,7 +67,7 @@ Create new post
 
 **Body (raw JSON):**
 ```json
-{
+
    {
     "title": "Jesus é o Caminho",
     "text": "O Verbo que se fez carne veio ao mundo, não para condenar o mundo, mas para que seja salvo por Ele.",
@@ -75,7 +75,7 @@ Create new post
         "id": "2e612609-358d-4642-a850-d0c062722fe8"
     }
 }
-}
+
 ```
 
 **URL:** http://localhost:8080/api/posts
