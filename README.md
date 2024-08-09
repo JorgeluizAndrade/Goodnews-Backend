@@ -1,115 +1,124 @@
-# Goodnews-Backend
+# Goodnews-Backend 
 
-## Project for the Gospel.
-Jesus is King!
-## Endpoints
+This document outlines the API endpoints for the Goodnews backend, a project focused on the Gospel.
 
-### POST /register
-Register new User
-**URL:** `http://localhost:8080/api/auth/register`
+**Supported Methods:**
 
-**Body (raw JSON):**
-```json
+* POST
+* GET
+* DELETE
+* PUT
+
+**Base URL:**
+
+http://localhost:8080/api/
+
+**Authentication:**
+
+Certain endpoints require authorization using a Bearer token. The token itself is not provided here, but denoted by `<token>`.
+
+## User Management
+
+**Register User (POST):**
+
+* Endpoint: http://localhost:8080/api/auth/register
+* Body (raw JSON):
+
+```
 {
-    "name": "Jorge",
-    "lastname": "Andrade",
-    "email": "jorge1718@gmail.com",
-    "password": "1234",
-    "role": "ADMIN"
+  "name":"Jorge",
+  "lastname":"Andrade",  
+  "email":"jorge1718@gmail.com",
+  "password":"1234",
+  "role":"ADMIN"
 }
 ```
 
-## POST /login
-Faz login de um usuário.
+**Login User (POST):**
 
-**URL:** http://localhost:8080/api/auth/login
+* Endpoint: http://localhost:8080/api/auth/login
+* Body (raw JSON):
 
-**Body (raw JSON):**
-```json
-
-    {
-    "email": "jorge1718@gmail.com",
-    "password": "1234"
-
-
+```
+{
+  "email":"jorge1718@gmail.com",
+    "password":"1234"
 }
 ```
 
-## GET /user/{id}
-Find user By id
+**Get User Information (GET):**
 
-**URL:** http://localhost:8080/api/user/480c742a-02bd-4d66-ab81-3ce513394e0b
+* Endpoint: http://localhost:8080/api/user
+* Requires Authorization (Bearer Token)
 
-## DELETE /user/{id}
+**Get User by ID (GET):**
 
-Delete User by id
-**URL:** http://localhost:8080/api/user/480c742a-02bd-4d66-ab81-3ce513394e0b
+* Endpoint: http://localhost:8080/api/user/<user_id> (Replace `<user_id>` with the actual user ID)
+* Requires Authorization (Bearer Token)
 
+**Update User Information (PUT):**
 
-**Authorization:** Bearer Token
-
-## PUT /user/{id}
-Update User by id
-**URL:** http://localhost:8080/api/user/480c742a-02bd-4d66-ab81-3ce513394e0b
-**Authorization:** Bearer Token
-
-
-# Post 
-
-## GET /posts
-
-return all posts
-
-**URL:** http://localhost:8080/api/posts
-
-## POST /posts
-Create new post
-
-**Body (raw JSON):**
-```json
-
-   {
-    "title": "Jesus é o Caminho",
-    "text": "O Verbo que se fez carne veio ao mundo, não para condenar o mundo, mas para que seja salvo por Ele.",
-    "user": {
-        "id": "2e612609-358d-4642-a850-d0c062722fe8"
-    }
-}
+* Endpoint: http://localhost:8080/api/user/<user_id> (Replace `<user_id>` with the actual user ID)
+* Requires Authorization (Bearer Token)
+* Body (raw JSON):
 
 ```
-
-**URL:** http://localhost:8080/api/posts
-
-**Authorization:** Bearer Token
-
-## DELETE /posts/{id}
-
-Delete post by ID
-
-**URL:** http://localhost:8080/api/posts/d45e8db5-2fa5-49cf-bc9a-29632b6a764a]
-**Authorization:** Bearer Token
-
-
-##  PUT /posts - will be change soon.
-Update Post 
-
-**Body (raw JSON):**
-```json
-
-   {
-    "title": "Jesus é a vida",
-    "text": "Santo, Santo, Santo é o Senhor!",
-    "user": {
-        "id": "2e612609-358d-4642-a850-d0c062722fe8"
-    }
+{
+  "name":"Jorge Luiz",
+  "lastname":"Andrade"
 }
-
 ```
 
-**URL:** http://localhost:8080/api/posts/d45e8db5-2fa5-49cf-bc9a-29632b6a764a
-**Authorization:** Bearer Token
+**Delete User (DELETE):**
 
-## Autores
+* Endpoint: http://localhost:8080/api/user/<user_id> (Replace `<user_id>` with the actual user ID)
+* Requires Authorization (Bearer Token)
 
-- [@JorgeluizAndrade](https://github.com/JorgeluizAndrade)
+## Post Management
 
+**Create Post (POST):**
+
+* Endpoint: http://localhost:8080/api/posts
+* Requires Authorization (Bearer Token)
+* Body (raw JSON):
+
+```
+{
+  "title": "Jesus é o Caminho",
+  "text": "O Verbo que se fez carne veio ao mundo, não para codenar o mundo, mas para que seja salvo por Ele.",
+  "user": {
+    "id": "2e612609-358d-4642-a850-d0c062722fe8"
+  }
+}
+```
+
+**Get All Posts (GET):**
+
+* Endpoint: http://localhost:8080/api/posts
+
+**Get Post by ID (GET):**
+
+* Endpoint: http://localhost:8080/api/posts/<post_id> (Replace `<post_id>` with the actual post ID)
+
+**Delete Post (DELETE):**
+
+* Endpoint: http://localhost:8080/api/posts/<post_id> (Replace `<post_id>` with the actual post ID)
+* Requires Authorization (Bearer Token)
+
+**Update Post (PUT):**
+
+* Endpoint: http://localhost:8080/api/posts
+* Requires Authorization (Bearer Token)
+* Body (raw JSON):
+
+```
+{
+  "title": "Jesus é a vida",
+  "text": "Santo, Santo, Santo é o Senhor!",
+  "user": {
+    "id": "2e612609-358d-4642-a850-d0c062722fe8"
+  }
+}
+```
+
+This document provides a basic overview of the Goodnews backend API in raw format. 
