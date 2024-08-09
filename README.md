@@ -1,9 +1,7 @@
-**Goodnews-Backend**
+# Goodnews-Backend
 
 ## Project for the Gospel.
 Jesus is King!
-
-
 ## Endpoints
 
 ### POST /register
@@ -92,7 +90,7 @@ Delete post by ID
 **Authorization:** Bearer Token
 
 
-##  PUT /posts
+##  PUT /posts - will be change soon.
 Update Post 
 
 **Body (raw JSON):**
@@ -111,4 +109,7 @@ Update Post
 **URL:** http://localhost:8080/api/posts/d45e8db5-2fa5-49cf-bc9a-29632b6a764a
 **Authorization:** Bearer Token
 
+## Autores
+
+- [@JorgeluizAndrade](https://github.com/JorgeluizAndrade)
 
