@@ -120,5 +120,3 @@ Certain endpoints require authorization using a Bearer token. The token itself i
   }
 }
 ```
-
-This document provides a basic overview of the Goodnews backend API in raw format. 
