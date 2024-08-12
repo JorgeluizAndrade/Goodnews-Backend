@@ -66,7 +66,9 @@ public class PostService {
 		postRepository.delete(post);
 	}
 
-	public Post updatePost(String postId, PostRequestDTO data) {
+	public Post updatePost(String postId, String userId, PostRequestDTO data) {
+		User userAuthor = this.userRepository.findById(userId)
+				.orElseThrow(() -> new ValidUserException("User not found with id: " + userId));
 
 		Post existingPost = postRepository.findById(postId)
 				.orElseThrow(() -> new ValidUserException("Post not found with id: " + postId));
@@ -89,6 +91,14 @@ public class PostService {
 
 		if (data.user().getId() == null && data.user().getId().isEmpty()) {
 			throw new ValidPostException("User Id is required");
+		}
+
+		if (!userId.equals(existingPost.getUser().getId())) {
+			throw new ValidPostException("User Id is wrong. Try with correct ID");
+		}
+
+		if (!userId.equals(data.user().getId())) {
+			throw new ValidPostException("User Id is wrong!");
 		}
 
 		if (!userRepository.existsById(existingPost.getUser().getId())) {
