@@ -107,7 +107,7 @@ Certain endpoints require authorization using a Bearer token. The token itself i
 
 **Update Post (PUT):**
 
-* Endpoint: http://localhost:8080/api/posts
+* Endpoint: http://localhost:8080/api/posts/{postId}/{userId}
 * Requires Authorization (Bearer Token)
 * Body (raw JSON):
 
@@ -116,7 +116,7 @@ Certain endpoints require authorization using a Bearer token. The token itself i
   "title": "Jesus é a vida",
   "text": "Santo, Santo, Santo é o Senhor!",
   "user": {
-    "id": "2e612609-358d-4642-a850-d0c062722fe8"
+    "id": "{userId}"
   }
 }
 ```
