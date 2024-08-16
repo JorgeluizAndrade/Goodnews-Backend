@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.goodnews.api.dto.UpdatdeUserDTO;
 import com.project.goodnews.domain.entity.user.User;
 import com.project.goodnews.exception.NotFoundException;
-import com.project.goodnews.service.UserService;
+import com.project.goodnews.service.ipml.UserServiceImpl;
 
 @RestController
 @RequestMapping("api/user")
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@GetMapping
 	public List<User> findAll() {

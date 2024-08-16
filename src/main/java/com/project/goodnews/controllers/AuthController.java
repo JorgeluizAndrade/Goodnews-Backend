@@ -17,7 +17,7 @@ import com.project.goodnews.api.dto.RegisterDTO;
 import com.project.goodnews.domain.entity.user.User;
 import com.project.goodnews.infrastructure.TokenService;
 import com.project.goodnews.repository.UserRepository;
-import com.project.goodnews.service.UserService;
+import com.project.goodnews.service.ipml.UserServiceImpl;
 
 import jakarta.validation.Valid;
 
@@ -29,7 +29,7 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 
 	@Autowired
 	private TokenService tokenService;

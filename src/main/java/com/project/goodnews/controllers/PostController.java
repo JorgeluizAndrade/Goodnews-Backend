@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.goodnews.api.dto.PostRequestDTO;
 import com.project.goodnews.domain.entity.posts.Post;
 import com.project.goodnews.exception.NotFoundException;
-import com.project.goodnews.service.PostService;
+import com.project.goodnews.service.ipml.PostServiceImpl;
 
 import jakarta.validation.Valid;
 
@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 public class PostController {
 
 	@Autowired
-	private PostService postService;
+	private PostServiceImpl postService;
 
 	@GetMapping
 	public List<Post> findAll() {
