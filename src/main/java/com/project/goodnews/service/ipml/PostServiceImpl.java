@@ -19,7 +19,7 @@ import com.project.goodnews.service.PostService;
 import com.project.goodnews.utils.PostUtils;
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostRepository postRepository;
@@ -28,14 +28,7 @@ public class PostServiceImpl implements PostService{
 	private UserRepository userRepository;
 
 	public List<Post> getAllPosts() {
-		List<Post> posts = new ArrayList<>();
-
-		Iterable<Post> postsAll = this.postRepository.findAll();
-
-		for (Post post : postsAll) {
-			posts.add(post);
-		}
-		return posts;
+		return this.postRepository.findAll();		
 	}
 
 	public Optional<Post> getByPostSlugAndId(String slug, String id) {
@@ -68,7 +61,7 @@ public class PostServiceImpl implements PostService{
 				.orElseThrow(() -> new NotFoundException("Post not found with id: " + postId));
 		postRepository.delete(post);
 	}
-	
+
 	public Post updatePost(String postId, String userId, PostRequestDTO data) {
 		Post existingPost = postRepository.findById(postId)
 				.orElseThrow(() -> new ValidUserException("Post not found with id: " + postId));

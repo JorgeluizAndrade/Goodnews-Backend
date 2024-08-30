@@ -30,15 +30,8 @@ public class UserServiceImpl implements UserService {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	public List<User> getAllUsers() {
-		List<User> users = new ArrayList<>();
+		return this.userRepository.findAll();
 
-		Iterable<User> allUsers = this.userRepository.findAll();
-
-		for (User user : allUsers) {
-			users.add(user);
-		}
-
-		return users;
 	}
 
 	public Optional<User> getByUserId(String id) {
