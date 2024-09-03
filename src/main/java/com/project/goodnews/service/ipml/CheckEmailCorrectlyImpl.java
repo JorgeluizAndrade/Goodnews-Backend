@@ -11,7 +11,7 @@ import com.project.goodnews.service.CheckEmailCorrectly;
 @Service
 public class CheckEmailCorrectlyImpl implements CheckEmailCorrectly {
 
-    private static final String REGEX_EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+    private static final String REGEX_EMAIL = "/^(?!\.)(?!.*\.\.)([A-Z0-9_'+-\.]*)[A-Z0-9_'+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i";
 
 	@Override
 	public boolean isEmailValid(String email) {
