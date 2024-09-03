@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.goodnews.api.dto.PostRequestDTO;
 import com.project.goodnews.domain.entity.user.User;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +34,7 @@ public class Post {
 	private String title;
 	
 	@NotBlank(message = "The field name cannot be blank")
+	@Column(columnDefinition="text", length=10485760)
 	private String text;
 
 	private String slug;
