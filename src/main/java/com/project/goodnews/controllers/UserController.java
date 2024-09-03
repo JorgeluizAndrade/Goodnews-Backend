@@ -28,20 +28,17 @@ public class UserController {
 	private UserServiceImpl userService;
 
 	@GetMapping
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public List<User> findAll() {
 		return this.userService.getAllUsers();
 	}
 
 	@GetMapping("/{id}")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity<User> findById(@PathVariable("id") String id) {
 		return userService.getByUserId(id).map(ResponseEntity::ok)
 				.orElseThrow(() -> new NotFoundException("User not found with the given ID."));
 	}
 
 	@PutMapping("/{id}")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<User> attUser(@PathVariable String id, @RequestBody UpdatdeUserDTO data) {
 		User updateUser = userService.updateUser(id, data);
@@ -50,7 +47,6 @@ public class UserController {
 	}
 
 	@DeleteMapping("/{id}")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity deleteUser(@PathVariable("id") String id) {
 		try {

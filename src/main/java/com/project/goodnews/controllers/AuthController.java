@@ -37,7 +37,6 @@ public class AuthController {
 
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.OK)
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
 		var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
 		var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -49,7 +48,6 @@ public class AuthController {
 
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
 		User newUser = new User(data.name(), data.lastname(), data.email(), data.password(), data.role());
 

@@ -30,13 +30,11 @@ public class PostController {
 	@Autowired
 	private PostServiceImpl postService;
 
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping
 	public List<Post> findAll() {
 		return postService.getAllPosts();
 	}
 
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/{slug}/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity findBySlugAndId(@PathVariable("slug") String slug, @PathVariable("id") String id) {
@@ -46,7 +44,6 @@ public class PostController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity createPost(@RequestBody @Valid PostRequestDTO data) {
 		Post createdPost = postService.createPost(data);
 
@@ -55,7 +52,6 @@ public class PostController {
 
 	@PutMapping("/{id}/{userId}")
 	@ResponseStatus(HttpStatus.OK)
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity attPost(@PathVariable("id") String id, @PathVariable("userId") String userId,
 			@RequestBody PostRequestDTO data) {
 		Post updatePost = postService.updatePost(id, userId, data);
@@ -65,7 +61,6 @@ public class PostController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity delete(@PathVariable("id") String id) {
 		try {
 			this.postService.deletePost(id);
