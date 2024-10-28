@@ -53,6 +53,8 @@ public class SecurityConfigurations {
 	    CorsConfiguration corsConfiguration = new CorsConfiguration();
 	    corsConfiguration.setAllowCredentials(true);
 	    corsConfiguration.addAllowedOrigin("http://localhost:3000"); // URL do frontend
+	    corsConfiguration.addAllowedOrigin("https://goodnews-pink.vercel.app/"); 
+
 	    corsConfiguration.addAllowedHeader("*");
 	    corsConfiguration.addAllowedMethod("*");
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -66,6 +68,7 @@ public class SecurityConfigurations {
 	    CorsConfiguration corsConfiguration = new CorsConfiguration();
 	    corsConfiguration.setAllowCredentials(true);
 	    corsConfiguration.addAllowedOrigin("http://localhost:3000");
+	    corsConfiguration.addAllowedOrigin("https://goodnews-pink.vercel.app/");
 	    corsConfiguration.addAllowedHeader("*");
 	    corsConfiguration.addAllowedMethod("*");
 	    source.registerCorsConfiguration("/**", corsConfiguration);
