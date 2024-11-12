@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.goodnews.api.dto.UpdatdeUserDTO;
 import com.project.goodnews.domain.entity.user.User;
 import com.project.goodnews.exception.NotFoundException;
+import com.project.goodnews.request.payload.ApiResponse;
 import com.project.goodnews.service.ipml.UserServiceImpl;
 
 @RestController
@@ -44,6 +46,14 @@ public class UserController {
 		User updateUser = userService.updateUser(id, data);
 
 		return ResponseEntity.status(HttpStatus.OK).body(updateUser);
+	}
+
+	@PutMapping("/{email}/giveAdmin")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<ApiResponse> giveAdmin(@PathVariable(name = "email") String email) {
+		ApiResponse apiResponse = userService.giveAdmin(email);
+
+		return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

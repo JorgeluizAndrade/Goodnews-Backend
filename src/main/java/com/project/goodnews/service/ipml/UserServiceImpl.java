@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.goodnews.api.dto.UpdatdeUserDTO;
 import com.project.goodnews.domain.entity.user.User;
+import com.project.goodnews.domain.entity.user.UserRole;
 import com.project.goodnews.exception.NotFoundException;
 import com.project.goodnews.exception.UserAlreadyExistsException;
 import com.project.goodnews.exception.ValidUserException;
 import com.project.goodnews.repository.UserRepository;
+import com.project.goodnews.request.payload.ApiResponse;
 import com.project.goodnews.service.UserService;
 import com.project.goodnews.utils.UserUtils;
 
@@ -77,4 +80,18 @@ public class UserServiceImpl implements UserService {
 		User user = this.userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User id not exist"));
 		userRepository.delete(user);
 	}
+
+	@Override
+	public ApiResponse giveAdmin(String email) {
+		User user = this.userRepository.findByEmail(email);
+
+		user.setRole(UserRole.ADMIN);
+		
+		userRepository.save(user);
+		
+		
+		return new ApiResponse(Boolean.TRUE, "You gave ADMIN role to user: " + email);
+
+	}
+
 }

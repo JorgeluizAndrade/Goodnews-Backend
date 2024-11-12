@@ -43,7 +43,7 @@ public class SecurityConfigurations {
 						.requestMatchers(HttpMethod.PUT, "api/posts/**").hasAnyRole("ADMIN")
 						.requestMatchers(HttpMethod.GET, "api/user").permitAll()
 						.requestMatchers(HttpMethod.DELETE, "api/user/**").hasAnyRole("ADMIN", "USER")
-						.requestMatchers(HttpMethod.PUT, "api/user").hasAnyRole("ADMIN", "USER")
+						.requestMatchers(HttpMethod.PUT, "api/user/**").hasAnyRole("ADMIN", "USER")
 						.anyRequest().authenticated())
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
 	}
@@ -52,7 +52,7 @@ public class SecurityConfigurations {
 	public CorsFilter corsFilter() {
 	    CorsConfiguration corsConfiguration = new CorsConfiguration();
 	    corsConfiguration.setAllowCredentials(true);
-	    corsConfiguration.addAllowedOrigin("http://localhost:3000"); // URL do frontend
+	    corsConfiguration.addAllowedOrigin("http://localhost:3000"); 
 	    corsConfiguration.addAllowedOrigin("https://goodnews-pink.vercel.app/"); 
 
 	    corsConfiguration.addAllowedHeader("*");

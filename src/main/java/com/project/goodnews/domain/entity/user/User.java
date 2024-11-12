@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.goodnews.domain.entity.posts.Post;
 
 import jakarta.persistence.Column;
@@ -49,7 +50,8 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	@NotEmpty(message = "Email cannot be empty")
 	private String email;
-
+	
+	@JsonIgnore
 	@NotEmpty(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters long")	
 	private String password;
