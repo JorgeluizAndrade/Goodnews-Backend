@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.goodnews.api.dto.AuthenticationDTO;
 import com.project.goodnews.api.dto.LoginResponseDTO;
 import com.project.goodnews.api.dto.RegisterDTO;
+import com.project.goodnews.api.dto.UserResponseDto;
 import com.project.goodnews.domain.entity.user.User;
 import com.project.goodnews.infrastructure.TokenService;
+import com.project.goodnews.mapper.UserMapper;
 import com.project.goodnews.repository.UserRepository;
 import com.project.goodnews.service.ipml.UserServiceImpl;
 
@@ -26,14 +28,18 @@ import jakarta.validation.Valid;
 @RequestMapping("api/auth")
 public class AuthController {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
+	private final UserServiceImpl userService;
+	private final TokenService tokenService;
+	private final UserMapper mapper;
 
-	@Autowired
-	private UserServiceImpl userService;
-
-	@Autowired
-	private TokenService tokenService;
+	public AuthController(AuthenticationManager authenticationManager, UserServiceImpl userService,
+			TokenService tokenService, UserMapper mapper) {
+		this.authenticationManager = authenticationManager;
+		this.userService = userService;
+		this.tokenService = tokenService;
+		this.mapper = mapper;
+	}
 
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.OK)
@@ -49,11 +55,15 @@ public class AuthController {
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
-		User newUser = new User(data.name(), data.lastname(), data.email(), data.password(), data.role());
+		// User newUser = new User(data.name(), data.lastname(), data.email(),
+		// data.password(), data.role());
 
+		User newUser = mapper.toEntity(data);
 		User createdUser = userService.createUser(newUser);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+		UserResponseDto response = mapper.toDto(createdUser);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 }
